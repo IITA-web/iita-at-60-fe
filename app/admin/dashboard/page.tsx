@@ -96,7 +96,7 @@ export default function AdminDashboardPage() {
     <main className="admin-shell">
       <header className="admin-topbar">
         <Link href="/" className="brand no-underline text-white">
-          <span className="brand-mark" style={{ background: "#2b7950" }}>IITA</span>
+          <span className="brand-mark" >IITA</span>
           <span>IITA @60<small style={{ color: "#c9ddce" }}>Admin moderation</small></span>
         </Link>
         <div className="flex gap-2">
