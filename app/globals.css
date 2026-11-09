@@ -31,6 +31,7 @@ button:disabled { cursor: not-allowed; opacity: .62; }
 .header-actions { display: flex; align-items: center; gap: 1rem; }
 .header-cta { padding: .65rem .9rem; font-size: .85rem; }
 .brand { display: flex; align-items: center; gap: .75rem; font-weight: 800; letter-spacing: -.04em; }
+.brand-logo { display: block; width: 240px; height: 112px; object-fit: cover; object-position: center 54%; background: white; }
 .brand-mark {
   display: grid; place-items: center; width: 44px; height: 44px;
   border-radius: 14px; color: white; background: var(--primary); font-size: .85rem;
@@ -146,6 +147,7 @@ button:disabled { cursor: not-allowed; opacity: .62; }
 }
 @media (max-width: 600px) {
   .site-header { padding: 1rem; }
+  .brand-logo { width: 160px; height: 76px; }
   .header-actions { gap: .55rem; }
   .header-actions .nav-link { font-size: .78rem; }
   .header-cta { padding: .55rem .65rem; font-size: .75rem; }

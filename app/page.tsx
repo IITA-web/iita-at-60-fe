@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { MessageCircle, X, Sparkles } from "lucide-react";
 import CommentForm from "@/components/CommentForm";
 import CommentWall from "@/components/CommentWall";
+import anniversaryLogo from "../IITA-at-60-logo.png";
 
 export default function HomePage() {
   const [formOpen, setFormOpen] = useState(false);
@@ -13,11 +15,12 @@ export default function HomePage() {
     <main>
       <header className="site-header">
         <Link href="/" className="brand no-underline text-inherit">
-          <span className="brand-mark">IITA</span>
-          <span>
-            IITA <span className="text-green-800">@60</span>
-            <small>Six decades of impact</small>
-          </span>
+          <Image
+            className="brand-logo"
+            src={anniversaryLogo}
+            alt="IITA 60th anniversary: Transforming African Agriculture, 1967–2027"
+            priority
+          />
         </Link>
           <div className="header-actions">
             <a className="nav-link" href="#messages">Community messages ↗</a>
