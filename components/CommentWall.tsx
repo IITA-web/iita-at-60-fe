@@ -45,6 +45,31 @@ export default function CommentWall() {
 
   useEffect(() => {
     void loadComments();
+    let refreshing = false;
+    const refreshLatest = async () => {
+      if (refreshing) return;
+      refreshing = true;
+      try {
+        const result = await getPublicComments(1, PAGE_SIZE);
+        setComments((previous) => {
+          const latestIds = new Set(result.items.map((item) => item.id));
+          return [...result.items, ...previous.filter((item) => !latestIds.has(item.id))];
+        });
+      } catch {
+        // Keep showing the current wall when a background refresh briefly fails.
+      } finally {
+        refreshing = false;
+      }
+    };
+    const handleRefresh = () => void refreshLatest();
+    window.addEventListener("comments:refresh", handleRefresh);
+    const interval = window.setInterval(handleRefresh, 10000);
+    // Refresh immediately after submissions and periodically for other visitors.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      window.removeEventListener("comments:refresh", handleRefresh);
+      window.clearInterval(interval);
+    };
     // Load the first page once on mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

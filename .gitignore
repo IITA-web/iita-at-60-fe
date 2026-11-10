@@ -25,3 +25,33 @@ pnpm-debug.log*
 Thumbs.db
 .idea/
 .vscode/
+# Dependencies
+/node_modules/
+
+# Next.js and build output
+/.next/
+/out/
+/build/
+/dist/
+next-env.d.ts
+*.tsbuildinfo
+
+# Environment variables (keep example files)
+.env*
+!.env*.example
+
+# Test coverage
+/coverage/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Deployment metadata
+/.vercel/
+
+# OS files
+.DS_Store
+Thumbs.db

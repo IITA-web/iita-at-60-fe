@@ -5,7 +5,7 @@ import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { submitComment } from "@/lib/api";
 
-export default function CommentForm() {
+export default function CommentForm({ onSubmitted }: { onSubmitted?: () => void }) {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,12 +17,14 @@ export default function CommentForm() {
 
     try {
       await submitComment({ name: name.trim(), message: message.trim() });
+      window.dispatchEvent(new Event("comments:refresh"));
       // Deliberately show the same success response regardless of sentiment.
       toast.success("Your message has been received!", {
         description: "Thank you for being part of the IITA @60 celebration.",
       });
       setName("");
       setMessage("");
+      onSubmitted?.();
     } catch (error) {
       toast.error("We couldn't submit your message", {
         description: error instanceof Error ? error.message : "Please try again shortly.",
