@@ -7,6 +7,7 @@ export type PublicComment = {
   id: string;
   name: string;
   message: string;
+  profile_picture: string | null;
   created_at: string;
 };
 
@@ -40,7 +41,7 @@ async function parseResponse<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export async function submitComment(input: { name: string; message: string }) {
+export async function submitComment(input: { name: string; message: string; profile_picture: string | null }) {
   const response = await fetch(`${API_URL}/api/v1/comments`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

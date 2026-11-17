@@ -23,7 +23,7 @@ export default function HomePage() {
           />
         </Link>
           <div className="header-actions">
-            <a className="nav-link" href="#messages">Community messages ↗</a>
+            <a className="nav-link" href="https://www.iita.org/" target="_blank" rel="noreferrer">Visit IITA ↗</a>
             <button className="btn-primary header-cta" onClick={() => setFormOpen(true)}><MessageCircle size={16} /> Leave a message</button>
           </div>
       </header>
@@ -31,7 +31,8 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero-content">
           <span className="eyebrow"><Sparkles size={14} /> 60 years of growing impact</span>
-          <h1>Rooted in Africa.<br /><span>Growing the future.</span></h1>
+          <h1>Share your <span>message.</span></h1>
+          <p>The reason we’re here: read and share messages celebrating IITA @60.</p>
         </div>
       </section>
 
@@ -39,11 +40,8 @@ export default function HomePage() {
         <div className="section-inner">
           <div className="section-heading">
             <div>
-              <div className="kicker">The reason we’re here</div>
               <h2>Messages from our community.</h2>
-              <p>Read and share messages celebrating IITA @60.</p>
             </div>
-            <button className="btn-primary" onClick={() => setFormOpen(true)}><MessageCircle size={17} /> Share your message</button>
           </div>
           <CommentWall />
         </div>
