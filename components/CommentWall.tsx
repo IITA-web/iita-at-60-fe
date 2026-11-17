@@ -83,6 +83,7 @@ export default function CommentWall() {
             <p className="comment-message">{comment.message}</p>
             <div className="comment-meta">
               <div>
+                {comment.profile_picture && <img className="comment-avatar" src={comment.profile_picture} alt={`${comment.name}'s profile`} />}
                 <div className="comment-name">{comment.name}</div>
                 <div className="comment-date">{displayDate(comment.created_at)}</div>
               </div>
