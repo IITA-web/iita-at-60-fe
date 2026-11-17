@@ -156,7 +156,16 @@ export default function AdminDashboardPage() {
                   {comments.map((comment) => (
                     <tr key={comment.id}>
                       <td style={{ maxWidth: 400 }}>
-                        <strong>{comment.name}</strong>
+                        <div className="admin-comment-author">
+                          {comment.profile_picture && (
+                            <img
+                              className="admin-comment-avatar"
+                              src={comment.profile_picture}
+                              alt={`${comment.name}'s profile`}
+                            />
+                          )}
+                          <strong>{comment.name}</strong>
+                        </div>
                         <p className="mt-2 whitespace-pre-wrap leading-6">{comment.message}</p>
                       </td>
                       <td>
