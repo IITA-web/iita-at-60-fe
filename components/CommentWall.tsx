@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowDown, LoaderCircle, MessageSquareQuote } from "lucide-react";
 import { toast } from "sonner";
 import { getPublicComments, PublicComment } from "@/lib/api";
+import CommentAvatar from "@/components/CommentAvatar";
 
 const PAGE_SIZE = 12;
 
@@ -83,7 +84,7 @@ export default function CommentWall() {
             <p className="comment-message">{comment.message}</p>
             <div className="comment-meta">
               <div>
-                {comment.profile_picture && <img className="comment-avatar" src={comment.profile_picture} alt={`${comment.name}'s profile`} />}
+                <CommentAvatar name={comment.name} picture={comment.profile_picture} />
                 <div className="comment-name">{comment.name}</div>
                 <div className="comment-date">{displayDate(comment.created_at)}</div>
               </div>

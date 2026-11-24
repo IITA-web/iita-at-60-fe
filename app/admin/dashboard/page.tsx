@@ -6,6 +6,7 @@ import { Check, ChevronLeft, ChevronRight, LogOut, RefreshCw, ShieldCheck, Trash
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { AdminComment, getAdminAnalytics, getAdminComments, moderateComment } from "@/lib/api";
+import CommentAvatar from "@/components/CommentAvatar";
 
 type Analytics = { total: number; approved: number; pending: number; negative: number };
 
@@ -157,13 +158,7 @@ export default function AdminDashboardPage() {
                     <tr key={comment.id}>
                       <td style={{ maxWidth: 400 }}>
                         <div className="admin-comment-author">
-                          {comment.profile_picture && (
-                            <img
-                              className="admin-comment-avatar"
-                              src={comment.profile_picture}
-                              alt={`${comment.name}'s profile`}
-                            />
-                          )}
+                          <CommentAvatar name={comment.name} picture={comment.profile_picture} className="admin-comment-avatar" />
                           <strong>{comment.name}</strong>
                         </div>
                         <p className="mt-2 whitespace-pre-wrap leading-6">{comment.message}</p>
