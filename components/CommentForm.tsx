@@ -9,6 +9,7 @@ export default function CommentForm({ onSubmitted }: { onSubmitted?: () => void 
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [profilePictureFile, setProfilePictureFile] = useState<File | null>(null);
   const [profilePictureName, setProfilePictureName] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +19,7 @@ export default function CommentForm({ onSubmitted }: { onSubmitted?: () => void 
     setLoading(true);
 
     try {
-      await submitComment({ name: name.trim(), message: message.trim(), profile_picture: profilePicture });
+      await submitComment({ name: name.trim(), message: message.trim(), profile_picture: profilePictureFile });
       window.dispatchEvent(new Event("comments:refresh"));
       // Deliberately show the same success response regardless of sentiment.
       toast.success("Your message has been received!", {
@@ -27,6 +28,7 @@ export default function CommentForm({ onSubmitted }: { onSubmitted?: () => void 
       setName("");
       setMessage("");
       setProfilePicture(null);
+      setProfilePictureFile(null);
       setProfilePictureName("");
       onSubmitted?.();
     } catch (error) {
@@ -41,8 +43,8 @@ export default function CommentForm({ onSubmitted }: { onSubmitted?: () => void 
   function handlePictureChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      toast.error("Choose an image file to continue.");
+    if (!["image/jpeg", "image/png", "image/gif", "image/webp"].includes(file.type)) {
+      toast.error("Choose a JPG, PNG, GIF, or WebP image to continue.");
       event.target.value = "";
       return;
     }
@@ -55,6 +57,7 @@ export default function CommentForm({ onSubmitted }: { onSubmitted?: () => void 
     reader.onload = () => {
       if (typeof reader.result === "string") {
         setProfilePicture(reader.result);
+        setProfilePictureFile(file);
         setProfilePictureName(file.name);
       }
     };
@@ -87,7 +90,7 @@ export default function CommentForm({ onSubmitted }: { onSubmitted?: () => void 
           ) : (
             <label className="profile-upload-label" htmlFor="visitor-picture"><ImagePlus size={19} /><span>Add a photo</span></label>
           )}
-          <input id="visitor-picture" className="profile-file-input" type="file" accept="image/*" onChange={handlePictureChange} />
+          <input id="visitor-picture" className="profile-file-input" type="file" accept="image/jpeg,image/png,image/gif,image/webp" onChange={handlePictureChange} />
         </div>
         <span className="upload-hint">JPG, PNG, GIF, or WebP · up to 2 MB</span>
       </div>
