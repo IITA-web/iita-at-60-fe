@@ -43,7 +43,7 @@ button:disabled { cursor: not-allowed; opacity: .62; }
   padding: clamp(2.2rem, 5vh, 4rem) clamp(1rem, 8vw, 8rem);
   background:
     linear-gradient(90deg, rgba(116,39,17,.96) 0%, rgba(169,60,27,.87) 40%, rgba(87,42,19,.35) 100%),
-    url('../Joyful Cassava Harvest Portrait (1).png') right 42% / auto 145% no-repeat,
+    url('../Joyful Cassava Harvest Portrait (1).png') center / cover no-repeat,
     linear-gradient(120deg, #a93c1b, #f66c3a 65%, #c94c20);
 }
 .hero:after {

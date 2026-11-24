@@ -41,11 +41,14 @@ async function parseResponse<T>(response: Response): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export async function submitComment(input: { name: string; message: string; profile_picture: string | null }) {
+export async function submitComment(input: { name: string; message: string; profile_picture: File | null }) {
+  const body = new FormData();
+  body.set("name", input.name);
+  body.set("message", input.message);
+  if (input.profile_picture) body.set("profile_picture", input.profile_picture);
   const response = await fetch(`${API_URL}/api/v1/comments`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(input),
+    body,
   });
   return parseResponse<{ success: boolean; message: string; comment_id: string }>(response);
 }
